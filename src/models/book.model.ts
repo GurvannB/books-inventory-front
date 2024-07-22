@@ -9,3 +9,10 @@ export type Book = {
 }
 
 export type BookWithoutType = Omit<Book, 'type'>;
+
+export type BookDto = {
+    bookNumber: number,
+    bookTypeId: number,
+    bookCondition: string,
+    comment?: string
+}

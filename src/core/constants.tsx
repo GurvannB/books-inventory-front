@@ -1,0 +1,1 @@
+export const bookConditions = ['Neuf', 'Utilisé', 'Légèrement endommagé', 'Moyennement endommagé', 'Très endommagé'];

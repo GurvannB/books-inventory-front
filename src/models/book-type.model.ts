@@ -11,3 +11,5 @@ export type BookType = {
 }
 
 export type BookTypeWithoutBooks = Omit<BookType, 'books'>;
+
+export type BookTypeDto = Omit<BookType, 'id'|'books'>;
