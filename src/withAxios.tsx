@@ -18,6 +18,7 @@ export default function WithAxios({ children }: Props): React.JSX.Element {
             return response;
         },
         async (error) => {
+            alert(error.response?.data[0]?.message ?? 'Une erreur est survenue');
             return await Promise.reject(error.response);
         },
     );

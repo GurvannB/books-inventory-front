@@ -210,7 +210,7 @@ export default function BooksTypesListPage() {
             </div>
             {!!selectedBookTypeId && <ConfirmModal open={deletionConfirmModalOpen}
                                                    title='Confirmation'
-                                                   message='Êtes vous sûr de vouloir supprimer ce manuel ?'
+                                                   message={`Êtes vous sûr de vouloir supprimer ce type de manuel ? Cette action entrainera aussi la suppression de ${bookTypes.find(b => b.id === selectedBookTypeId)?.books.length} manuels.`}
                                                    onClose={() => setDeletionConfirmModalOpen(false)}
                                                    onCancel={() => setDeletionConfirmModalOpen(false)}
                                                    onConfirm={handleConfirmDeletion}/>}
