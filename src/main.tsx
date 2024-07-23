@@ -6,6 +6,7 @@ import WithAxios from "./withAxios.tsx";
 import {createTheme, ThemeProvider} from "@mui/material";
 import {AppContextProvider} from "./contexts/app.context.tsx";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {Toaster} from "react-hot-toast";
 
 const theme = createTheme({
     palette: {
@@ -21,6 +22,7 @@ const theme = createTheme({
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
         <ThemeProvider theme={theme}>
+            <Toaster />
             <AppContextProvider>
                 <WithAxios>
                     <div className='w-screen h-screen'>

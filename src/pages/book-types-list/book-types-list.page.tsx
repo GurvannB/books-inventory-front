@@ -75,15 +75,6 @@ export default function BooksTypesListPage() {
         setLoading(bookTypesLoading);
     }, [bookTypesLoading]);
 
-    const bookTypeOptions = bookTypes.length ?
-        (bookTypes.map(type => (
-            <MenuItem key={type.id} value={type.id}>
-                {type.subject} {type.grade}
-            </MenuItem>
-        ))) : <MenuItem value=''>Aucun type de livre trouvé</MenuItem>;
-    const bookConditionOptions = bookConditions.map(condition => <MenuItem key={condition}
-                                                                           value={condition}>{condition}</MenuItem>);
-
     function handleDeleteSelectedBook() {
         if (selectedBookTypeId) setDeletionConfirmModalOpen(true);
     }
@@ -93,10 +84,10 @@ export default function BooksTypesListPage() {
             try {
                 setLoading(true);
                 await deleteBookType(selectedBookTypeId);
-                await reloadBookTypes();
                 setSelectedBookTypeId(undefined);
                 setDeletionConfirmModalOpen(false);
             } finally {
+                await reloadBookTypes();
                 setLoading(false);
             }
         }

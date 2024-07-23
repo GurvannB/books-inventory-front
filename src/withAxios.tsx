@@ -1,5 +1,6 @@
 import axios from "axios";
 import {useSearchParams} from "react-router-dom";
+import toast from "react-hot-toast";
 
 type Props = {
     children: React.JSX.Element
@@ -10,7 +11,7 @@ export default function WithAxios({ children }: Props): React.JSX.Element {
     const username = params.get('username');
     const password = params.get('password');
     if (!username || !password) {
-        alert('No credentials')
+        toast.error('Vous devez entrer des informations de connexion');
     }
 
     axios.interceptors.response.use(
@@ -18,7 +19,13 @@ export default function WithAxios({ children }: Props): React.JSX.Element {
             return response;
         },
         async (error) => {
-            alert(error.response?.data[0]?.message ?? 'Une erreur est survenue');
+            if (error.response.status === 401) {
+                toast.error("Aucun accès à la ressource, vous n'êtes pas connecté.e");
+            } else if (error.response.status === 400) {
+                toast.error("La requête est incomplète");
+            } else {
+                toast.error(error.response.data[0].message);
+            }
             return await Promise.reject(error.response);
         },
     );

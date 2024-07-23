@@ -113,10 +113,10 @@ export default function BooksListPage() {
             try {
                 setLoading(true);
                 await deleteBook(selectedBookId);
-                await reloadBooks();
                 setSelectedBookId(undefined);
                 setDeletionConfirmModalOpen(false);
             } finally {
+                await reloadBooks();
                 setLoading(false);
             }
         }
