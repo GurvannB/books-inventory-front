@@ -208,7 +208,7 @@ export default function BooksListPage() {
                     </div>
                     <div className='w-[210px] h-[297px] rounded border overflow-hidden'>
                         {formik.values.bookTypeId ? (
-                            <img src={bookTypes.find(b => b.id == formik.values.bookTypeId)?.coverUrl ?? ''} alt='Book image' className='w-full h-full object-contain object-center'/>
+                            <img src={bookTypes.find(b => b.id.toString() === formik.values.bookTypeId)?.coverUrl ?? ''} alt='Book image' className='w-full h-full object-contain object-center'/>
                         ) : (
                             <div className='w-full h-full bg-black/20'/>
                         )}
