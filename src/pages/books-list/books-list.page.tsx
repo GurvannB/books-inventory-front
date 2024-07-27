@@ -125,84 +125,93 @@ export default function BooksListPage() {
     return (
         <div className='flex flex-col gap-4 p-2'>
             <LoadingWrapper loading={loading}>
-                <form onSubmit={formik.handleSubmit} className='w-full gap-3 flex flex-col py-3'>
-                    <div className='flex gap-3 justify-center flex-wrap'>
-                        <TextField name='bookNumber'
-                                   type='number'
-                                   label='Book number'
-                                   variant='outlined'
-                                   disabled={loading}
-                                   required
-                                   fullWidth
-                                   className='max-w-[300px]'
-                                   value={formik.values.bookNumber}
-                                   onChange={(e) => formik.setFieldValue('bookNumber', e.target.value)}/>
-                        <FormControl fullWidth className='max-w-[300px]'>
-                            <InputLabel id="bookTypeLabel">Type de livre</InputLabel>
-                            <Select name="bookTypeId"
-                                    labelId='bookTypeLabel'
-                                    label="Type de livre"
+                <form onSubmit={formik.handleSubmit} className='w-full flex gap-5 items-center'>
+                    <div className='gap-3 flex flex-col py-3 flex-grow'>
+                        <div className='flex gap-3 justify-center flex-wrap'>
+                            <TextField name='bookNumber'
+                                       type='number'
+                                       label='Book number'
+                                       variant='outlined'
+                                       disabled={loading}
+                                       required
+                                       fullWidth
+                                       className='max-w-[300px]'
+                                       value={formik.values.bookNumber}
+                                       onChange={(e) => formik.setFieldValue('bookNumber', e.target.value)}/>
+                            <FormControl fullWidth className='max-w-[300px]'>
+                                <InputLabel id="bookTypeLabel">Type de livre</InputLabel>
+                                <Select name="bookTypeId"
+                                        labelId='bookTypeLabel'
+                                        label="Type de livre"
+                                        disabled={loading}
+                                        required
+                                        fullWidth
+                                        value={formik.values.bookTypeId}
+                                        onChange={(e) => formik.setFieldValue('bookTypeId', e.target.value)}>
+                                    <MenuItem value=''>Sélectionnez un type de livre</MenuItem>
+                                    {bookTypeOptions}
+                                </Select>
+                            </FormControl>
+                            <FormControl fullWidth className='max-w-[300px]'>
+                                <InputLabel id="bookConditionLabel">État du livre</InputLabel>
+                                <Select name="bookCondition"
+                                        labelId='bookConditionLabel'
+                                        label="État du livre"
+                                        disabled={loading}
+                                        required
+                                        fullWidth
+                                        value={formik.values.bookCondition}
+                                        onChange={(e) => formik.setFieldValue('bookCondition', e.target.value)}>
+                                    <MenuItem value=''>Sélectionnez un état de livre</MenuItem>
+                                    {bookConditionOptions}
+                                </Select>
+                            </FormControl>
+                        </div>
+                        <div className='flex justify-center'>
+                            <TextField name='comment'
+                                       label='Commentaire'
+                                       disabled={loading}
+                                       variant='outlined'
+                                       fullWidth
+                                       value={formik.values.comment}
+                                       onChange={(e) => formik.setFieldValue('comment', e.target.value)}/>
+                        </div>
+                        <div className='flex justify-center gap-4 flex-wrap'>
+                            {!!selectedBookId && <Button variant='text'
+                                                         color='secondary'
+                                                         disabled={loading}
+                                                         fullWidth
+                                                         className='max-w-[200px] !shadow-none !opacity-85 !text-black'
+                                                         sx={{color: 'white', fontWeight: 'bold'}}
+                                                         onClick={() => setSelectedBookId(undefined)}>
+                                Fermer
+                            </Button>}
+                            {!!selectedBookId && <Button variant='contained'
+                                                         disabled={loading}
+                                                         color='error'
+                                                         fullWidth
+                                                         className='max-w-[200px] !shadow-none !opacity-85'
+                                                         sx={{color: 'white', fontWeight: 'bold'}}
+                                                         onClick={handleDeleteSelectedBook}>
+                                Supprimer
+                            </Button>}
+                            <Button type='submit'
+                                    color='success'
+                                    variant='contained'
                                     disabled={loading}
-                                    required
                                     fullWidth
-                                    value={formik.values.bookTypeId}
-                                    onChange={(e) => formik.setFieldValue('bookTypeId', e.target.value)}>
-                                <MenuItem value=''>Sélectionnez un type de livre</MenuItem>
-                                {bookTypeOptions}
-                            </Select>
-                        </FormControl>
-                        <FormControl fullWidth className='max-w-[300px]'>
-                            <InputLabel id="bookConditionLabel">État du livre</InputLabel>
-                            <Select name="bookCondition"
-                                    labelId='bookConditionLabel'
-                                    label="État du livre"
-                                    disabled={loading}
-                                    required
-                                    fullWidth
-                                    value={formik.values.bookCondition}
-                                    onChange={(e) => formik.setFieldValue('bookCondition', e.target.value)}>
-                                <MenuItem value=''>Sélectionnez un état de livre</MenuItem>
-                                {bookConditionOptions}
-                            </Select>
-                        </FormControl>
+                                    className='max-w-[200px] !shadow-none !opacity-85'
+                                    sx={{color: 'white', fontWeight: 'bold'}}>
+                                {selectedBookId ? 'Modifer' : 'Ajouter'}
+                            </Button>
+                        </div>
                     </div>
-                    <div className='flex justify-center'>
-                        <TextField name='comment'
-                                   label='Commentaire'
-                                   disabled={loading}
-                                   variant='outlined'
-                                   fullWidth
-                                   value={formik.values.comment}
-                                   onChange={(e) => formik.setFieldValue('comment', e.target.value)}/>
-                    </div>
-                    <div className='flex justify-center gap-4 flex-wrap'>
-                        {!!selectedBookId && <Button variant='text'
-                                                     color='secondary'
-                                                     disabled={loading}
-                                                     fullWidth
-                                                     className='max-w-[200px] !shadow-none !opacity-85 !text-black'
-                                                     sx={{color: 'white', fontWeight: 'bold'}}
-                                                     onClick={() => setSelectedBookId(undefined)}>
-                            Fermer
-                        </Button>}
-                        {!!selectedBookId && <Button variant='contained'
-                                                     disabled={loading}
-                                                     color='error'
-                                                     fullWidth
-                                                     className='max-w-[200px] !shadow-none !opacity-85'
-                                                     sx={{color: 'white', fontWeight: 'bold'}}
-                                                     onClick={handleDeleteSelectedBook}>
-                            Supprimer
-                        </Button>}
-                        <Button type='submit'
-                                color='success'
-                                variant='contained'
-                                disabled={loading}
-                                fullWidth
-                                className='max-w-[200px] !shadow-none !opacity-85'
-                                sx={{color: 'white', fontWeight: 'bold'}}>
-                            {selectedBookId ? 'Modifer' : 'Ajouter'}
-                        </Button>
+                    <div className='w-[210px] h-[297px] rounded border overflow-hidden'>
+                        {formik.values.bookTypeId ? (
+                            <img src={bookTypes.find(b => b.id == formik.values.bookTypeId)?.coverUrl ?? ''} alt='Book image' className='w-full h-full object-contain object-center'/>
+                        ) : (
+                            <div className='w-full h-full bg-black/20'/>
+                        )}
                     </div>
                 </form>
             </LoadingWrapper>
