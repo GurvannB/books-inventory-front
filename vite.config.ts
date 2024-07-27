@@ -14,6 +14,14 @@ export default defineConfig(({mode}) => {
         }
       }
     },
+    preview: {
+      port: 3000,
+      proxy: {
+        '/api': {
+          target: env.VITE_API_URL
+        }
+      }
+    },
     build: {
       outDir: 'build',
     },
