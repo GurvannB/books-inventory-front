@@ -18,5 +18,6 @@ export async function deleteBook(id: number): Promise<void> {
 }
 
 export async function updateBook(id: number, values: BookDto): Promise<Book> {
-    await axios.put(`/api/books/${id}`, values);
+    const response = await axios.put(`/api/books/${id}`, values);
+    return response.data
 }

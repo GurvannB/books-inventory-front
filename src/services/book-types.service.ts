@@ -17,5 +17,6 @@ export async function updateBookType(bookTypeId: number, values: BookTypeDto): P
 }
 
 export async function deleteBookType(bookTypeId: number): Promise<BookType> {
-    await axios.delete(`/api/bookTypes/${bookTypeId}`);
+    const response = await axios.delete(`/api/bookTypes/${bookTypeId}`);
+    return response.data;
 }

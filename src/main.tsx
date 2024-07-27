@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import AppPage from './pages/app/app.page.tsx'
 import './index.css'

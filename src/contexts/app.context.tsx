@@ -1,4 +1,4 @@
-import React, {createContext, useEffect, useState} from 'react';
+import React, {createContext, useState} from 'react';
 import {Book} from "../models/book.model.ts";
 import {BookType} from "../models/book-type.model.ts";
 import {getBooks} from "../services/books.service.ts";
